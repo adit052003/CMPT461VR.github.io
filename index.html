@@ -19,6 +19,22 @@
     <p>Neon Escape VR &mdash; Use Arrow Keys (Left/Right) to change lanes, or drag mouse to look.</p>
   </div>
 
+  <!-- ========== Custom VR Override Button ========== -->
+  <button id="manualVRBtn" class="pulse-btn" style="position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); z-index: 99999999; padding: 14px 28px; font-size: 1.1rem; background: linear-gradient(135deg, #ff0055, #cc0044); color: #fff; border: 2px solid rgba(255, 0, 85, 0.8); border-radius: 12px; font-weight: bold; font-family: 'Orbitron', 'Segoe UI', sans-serif; cursor: pointer; text-shadow: 0 0 5px #fff; box-shadow: 0 0 20px rgba(255,0,85,0.6);">
+    CHANGE TO VR
+  </button>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const vrBtn = document.getElementById('manualVRBtn');
+      const scene = document.querySelector('a-scene');
+      if (vrBtn && scene) {
+        vrBtn.addEventListener('click', () => {
+          scene.enterVR();
+        });
+      }
+    });
+  </script>
+
   <!-- ========== Scanline Overlay (visual polish) ========== -->
   <div id="scanlines"></div>
 
