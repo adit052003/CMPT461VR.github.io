@@ -461,7 +461,7 @@ AFRAME.registerComponent('scene-setup', {
       whenMeshReady(tunnelEl, function () {
         tunnelEl.setAttribute('material', {
           shader: 'standard',
-          src: '#tex-tunnel',
+          src: gridSrc,
           repeat: '8 24',
           color: '#8ab0c8',
           emissive: '#1a0838',
@@ -496,7 +496,7 @@ AFRAME.registerComponent('scene-setup', {
       whenMeshReady(floor, function () {
         floor.setAttribute('material', {
           shader: 'standard',
-          src: '#tex-floor',
+          src: floorSrc,
           repeat: '12 48',
           color: '#8890b8',
           emissive: '#280055',
