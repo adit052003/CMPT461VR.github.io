@@ -1,0 +1,399 @@
+﻿/* ============================================================
+   Neon Escape VR - Stylesheet
+   Cyberpunk / synthwave aesthetic with neon glow effects
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+/* ---- Reset & Base ---- */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Orbitron', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #020010;
+}
+
+/* ---- Desktop helper text ---- */
+#desktop-ui {
+  position: fixed;
+  bottom: 14px;
+  width: 100%;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  z-index: 100;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 0.75rem;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+  transition: opacity 0.5s ease;
+  letter-spacing: 0.5px;
+}
+
+/* ---- Scanline overlay (CRT effect) ---- */
+#scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999998;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.06) 2px,
+    rgba(0, 0, 0, 0.06) 4px
+  );
+  mix-blend-mode: multiply;
+}
+
+/* ---- VR mode button override ---- */
+.a-enter-vr {
+  z-index: 1000 !important;
+}
+
+/* ============================================================
+   HTML Overlay Screens
+   ============================================================ */
+.overlay-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(5, 2, 30, 0.88) 0%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.overlay-panel {
+  background: linear-gradient(
+    155deg,
+    rgba(13, 13, 48, 0.96) 0%,
+    rgba(5, 5, 25, 0.99) 100%
+  );
+  border: 1.5px solid rgba(0, 255, 204, 0.35);
+  border-radius: 18px;
+  padding: 42px 52px;
+  text-align: center;
+  max-width: 520px;
+  width: 90%;
+  box-shadow:
+    0 0 40px rgba(0, 255, 204, 0.12),
+    0 0 90px rgba(170, 0, 255, 0.08),
+    inset 0 0 30px rgba(0, 255, 204, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  animation: panelGlow 3s ease-in-out infinite alternate;
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay-panel::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(0, 255, 204, 0.03) 25%,
+    transparent 50%,
+    rgba(170, 0, 255, 0.03) 75%,
+    transparent 100%
+  );
+  animation: panelShimmer 8s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes panelShimmer {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes panelGlow {
+  0% { box-shadow: 0 0 40px rgba(0,255,204,0.12), 0 0 90px rgba(170,0,255,0.08); }
+  100% { box-shadow: 0 0 60px rgba(0,255,204,0.22), 0 0 120px rgba(170,0,255,0.15); }
+}
+
+.neon-title {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 2.8rem;
+  color: #00ffcc;
+  text-shadow:
+    0 0 8px #00ffcc,
+    0 0 25px #00ffcc,
+    0 0 50px rgba(0, 255, 204, 0.5),
+    0 0 100px rgba(0, 255, 204, 0.2);
+  margin: 0 0 18px 0;
+  letter-spacing: 4px;
+  animation: titlePulse 2s ease-in-out infinite alternate;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes titlePulse {
+  0% { text-shadow: 0 0 8px #00ffcc, 0 0 25px #00ffcc, 0 0 50px rgba(0,255,204,0.5); }
+  100% { text-shadow: 0 0 12px #00ffcc, 0 0 35px #00ffcc, 0 0 70px rgba(0,255,204,0.7); }
+}
+
+.overlay-sub {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.82rem;
+  margin: 5px 0;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 300;
+  position: relative;
+  z-index: 1;
+}
+
+.overlay-hint {
+  color: #ffaa00;
+  font-size: 0.85rem;
+  margin: 8px 0;
+  font-family: 'Segoe UI', sans-serif;
+  text-shadow: 0 0 10px rgba(255, 170, 0, 0.35);
+  position: relative;
+  z-index: 1;
+}
+
+.divider {
+  width: 60%;
+  height: 1px;
+  margin: 18px auto;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 204, 0.4), transparent);
+  position: relative;
+  z-index: 1;
+}
+
+.btn-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 22px 0;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.overlay-btn {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 14px 38px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  margin-top: 14px;
+  position: relative;
+  z-index: 1;
+  outline: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ff0055, #cc0044);
+  color: #fff;
+  border: 2px solid rgba(255, 0, 85, 0.5);
+  box-shadow: 0 0 18px rgba(255, 0, 85, 0.35), 0 0 40px rgba(255, 0, 85, 0.15);
+}
+
+.btn-primary:hover,
+.btn-primary:active {
+  background: linear-gradient(135deg, #ff2277, #ff0055);
+  box-shadow: 0 0 30px rgba(255, 0, 85, 0.55), 0 0 60px rgba(255, 0, 85, 0.25);
+  transform: scale(1.06);
+}
+
+.btn-secondary {
+  background: rgba(40, 40, 70, 0.85);
+  color: #fff;
+  border: 2px solid rgba(170, 0, 255, 0.35);
+  box-shadow: 0 0 12px rgba(170, 0, 255, 0.18);
+}
+
+.btn-secondary:hover,
+.btn-secondary:active {
+  background: rgba(60, 60, 100, 0.9);
+  box-shadow: 0 0 22px rgba(170, 0, 255, 0.35);
+  transform: scale(1.06);
+}
+
+.pulse-btn {
+  animation: btnPulse 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes btnPulse {
+  0% { box-shadow: 0 0 18px rgba(255,0,85,0.35), 0 0 40px rgba(255,0,85,0.15); }
+  100% { box-shadow: 0 0 28px rgba(255,0,85,0.55), 0 0 60px rgba(255,0,85,0.3); }
+}
+
+.loading-bar {
+  width: 80%;
+  height: 6px;
+  margin: 24px auto 0;
+  background: rgba(255,255,255,0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.loading-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #00ffcc, #aa00ff);
+  border-radius: 3px;
+  animation: loadFill 2.8s ease-in-out forwards;
+}
+
+@keyframes loadFill {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+.screen-shake {
+  animation: shake 0.35s ease-out;
+}
+
+@keyframes shake {
+  0% { transform: translate(0, 0); }
+  15% { transform: translate(-6px, 4px); }
+  30% { transform: translate(5px, -3px); }
+  45% { transform: translate(-4px, 2px); }
+  60% { transform: translate(3px, -2px); }
+  75% { transform: translate(-2px, 1px); }
+  100% { transform: translate(0, 0); }
+}
+
+@media (max-width: 600px) {
+  .neon-title {
+    font-size: 1.7rem;
+    letter-spacing: 2px;
+  }
+
+  .overlay-panel {
+    padding: 28px 20px;
+    border-radius: 14px;
+  }
+
+  .overlay-btn {
+    font-size: 0.85rem;
+    padding: 12px 22px;
+  }
+
+  #desktop-ui {
+    display: none;
+  }
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.game-hud {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000000;
+  display: none;
+  min-width: 220px;
+  padding: 14px 18px;
+  color: #ffffff;
+  font-family: 'Orbitron', sans-serif;
+  pointer-events: none;
+  border: 1px solid rgba(0, 255, 204, 0.32);
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(6, 10, 30, 0.84), rgba(9, 2, 26, 0.62));
+  box-shadow: 0 0 22px rgba(0, 255, 204, 0.14);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  text-shadow: 0 0 10px rgba(0, 255, 204, 0.45);
+}
+
+.game-hud.hud-muted {
+  opacity: 0.72;
+}
+
+.hud-score {
+  margin-bottom: 6px;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #00ffcc;
+}
+
+.hud-level {
+  margin-bottom: 6px;
+  font-size: 1rem;
+  color: #ffaa00;
+}
+
+.hud-powerup {
+  min-height: 1.3rem;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.hud-health {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+.health-pip {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: rgba(50, 50, 50, 0.5);
+  box-shadow: none;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.health-pip.active {
+  background-color: #ff0055;
+  box-shadow: 0 0 8px rgba(255, 0, 85, 0.8);
+}
+
+.health-pip.inactive {
+  background-color: rgba(50, 50, 50, 0.5);
+  box-shadow: none;
+}
+
+@media (max-width: 600px) {
+  .game-hud {
+    top: 14px;
+    left: 14px;
+    min-width: 0;
+    padding: 12px 14px;
+  }
+
+  .hud-score {
+    font-size: 1.1rem;
+  }
+
+  .hud-level,
+  .hud-powerup,
+  .hud-health {
+    font-size: 0.8rem;
+  }
+}
