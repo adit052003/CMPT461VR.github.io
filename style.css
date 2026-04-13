@@ -54,6 +54,9 @@ body {
 /* ---- VR mode button override ---- */
 .a-enter-vr {
   z-index: 99999999 !important;
+  position: fixed !important;
+  bottom: 80px !important;
+  right: 20px !important;
 }
 
 /* ============================================================
